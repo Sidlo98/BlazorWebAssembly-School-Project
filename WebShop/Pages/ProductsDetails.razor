@@ -1,0 +1,51 @@
+﻿@page "/product/{id}"
+
+    <div class="container mt-5 text-center text-lg-start">
+      <div class="row align-items-center">
+        <div class="col-12 text-center">
+          <h2>Product Name</h2>
+        </div>
+        <div class="col-12 col-lg-6 mb-3">
+          <image
+            src="https://inetimg.se/img/688x386/2216934_1.jpg"
+            class="img-fluid"
+          />
+        </div>
+        <div class="col-12 col-lg-6">
+          <div>
+            <h5>Short Description:</h5>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos
+              quibusdam est iusto provident. Quidem aspernatur exercitationem
+              eum reiciendis delectus dignissimos.
+            </p>
+          </div>
+          <div class="mt-5">
+            <h5>Description:</h5>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos
+              quibusdam est iusto provident. Quidem aspernatur exercitationem
+              eum reiciendis delectus dignissimos.Lorem ipsum, dolor sit amet
+              consectetur adipisicing elit. Eos quibusdam est iusto provident.
+              Quidem aspernatur exercitationem eum reiciendis delectus
+              dignissimos.
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6"></div>
+        <div class="col-12 col-lg-6 justify-content-between">
+          <p>
+            <span class="text-danger">100kr</span>
+            <span class="text-muted">inc. tax</span>
+          </p>
+          <button class="btn btn-primary">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+
+}

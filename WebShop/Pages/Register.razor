@@ -1,0 +1,39 @@
+﻿@page "/register"
+
+  <div class="container mt-5  min-height">
+      <form>
+        <div class="mb-3">
+          <label for="firstName" class="form-label">FirstName:</label>
+          <input type="text" class="form-control" id="firstName" />
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">LastName:</label>
+          <input type="text" class="form-control" id="lastName" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" id="email" />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" class="form-control" id="password" />
+        </div>
+
+        <div class="mb-3">
+          <label for="rePassword" class="form-label">Re-enter Password:</label>
+          <input type="password" class="form-control" id="rePassword" />
+        </div>
+
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </div>
+      </form>
+      <div class="mb-3 d-flex justify-content-center">
+        <p>Already have an account? Login <a href="">here</a></p>
+      </div>
+    </div>
+
+@code {
+
+}
