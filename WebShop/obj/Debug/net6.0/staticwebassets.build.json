@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bhhjtlvnU+pWo2hZUGN9nM0mcQMI72f1bWSj/6AogV4=",
+  "Hash": "Ui0GPqdlU7gBCsGKLlqrFRaqZdw8cqmsraSXTAu6icQ=",
   "Source": "WebShop",
   "BasePath": "/",
   "Mode": "Root",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\poppe\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\6.0.0\\build\\net6.0\\blazor.webassembly.js"
+    },
+    {
+      "Identity": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll",
+      "SourceId": "WebShop",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\poppe\\.nuget\\packages\\blazored.localstorage\\4.1.5\\lib\\net5.0\\Blazored.LocalStorage.dll"
     },
     {
       "Identity": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\bin\\Debug\\net6.0\\wwwroot\\_framework\\dotnet.6.0.0.mr4tth48xg.js",
@@ -3993,6 +4010,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Runtime.InteropServices.RuntimeInformation.dll"
+    },
+    {
+      "Identity": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\obj\\Debug\\net6.0\\build-gz\\9cEfIbqC.gz",
+      "SourceId": "WebShop",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll"
     },
     {
       "Identity": "C:\\Users\\poppe\\Desktop\\WebShop\\WebShop\\obj\\Debug\\net6.0\\build-gz\\9hAmeN7W.gz",

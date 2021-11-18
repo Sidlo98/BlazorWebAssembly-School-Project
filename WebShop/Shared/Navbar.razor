@@ -1,5 +1,7 @@
-﻿
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+﻿@inject ISyncLocalStorageService LocalStorage
+@inject ICartService CartService
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
   <div class="container-fluid">
     <NavLink class="navbar-brand active" href="/" Match="NavLinkMatch.All">
         <i class="fas fa-tv"></i>
@@ -19,7 +21,7 @@
             <button class="btn btn-sm position-relative">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    1
+                    @GetProductCount()
                 </span>
             </button>
           </NavLink>
@@ -29,5 +31,22 @@
 </nav>
 
 @code {
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        CartService.OnChange += StateHasChanged;
+    }
+
+    private int GetProductCount()
+    {
+        var cart = LocalStorage.GetItem<List<CartItem>>("cart");
+        var q = 0;
+        foreach(var item in cart)
+        {
+            q = q + item.quantity;
+        }
+        return q;
+    }
 
 }

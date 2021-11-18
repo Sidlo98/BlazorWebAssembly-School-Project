@@ -7,6 +7,7 @@
   "linkerEnabled": false,
   "resources": {
     "assembly": {
+      "Blazored.LocalStorage.dll": "sha256-ItMv+HytRb8SgPKYiz75PK0k+DFgN1E247PZT\/8lODs=",
       "Microsoft.AspNetCore.Authorization.dll": "sha256-ODuGqSb\/EjQtAKtKGIHBUB8NM5h18TZENSXeu+IQyNk=",
       "Microsoft.AspNetCore.Components.dll": "sha256-OHXy3+qxNjNPiVPhtM6knnUNVpcsVVAbYQzt9ymQykI=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-JL6o2IwhVoOKMOUJKALvvZX5HskL\/2V75XnhH0T\/RhQ=",
@@ -196,13 +197,13 @@
       "mscorlib.dll": "sha256-tlYWYAypJO+6gsCjV734iAJn8xcZYhUjM7vgxDLJluE=",
       "netstandard.dll": "sha256-E48Na3ZQWKExltzTwgP0Ao+UqWhiVYeerXfUL9lEc+c=",
       "System.Private.CoreLib.dll": "sha256-J85Z1XnwapHef31sR58JFq+0HrFP5BjOoObPKjdFHCw=",
-      "WebShop.dll": "sha256-4E4G6cdq7yfKOwXC\/8ZitJhmT3kTLdNNnFvH5dxMXLE="
+      "WebShop.dll": "sha256-j87MHIhWFZxGoeOaSHq9kMLUSFXHOzKmo5EDisvwMlA="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "WebShop.pdb": "sha256-gUO4IhINi5ncQT4ujyMoS\/0sW6hxpJ6OA1cNqR+cSOU="
+      "WebShop.pdb": "sha256-+xmOKJzOKYdarb6f8Zyy2y\/NKVXv312bfmRuZnGNVjw="
     },
     "runtime": {
       "dotnet.6.0.0.mr4tth48xg.js": "sha256-LOq52qjRa3+zt3w4UL10rS3UdwHxVQxW0JAsMPO9QAM=",

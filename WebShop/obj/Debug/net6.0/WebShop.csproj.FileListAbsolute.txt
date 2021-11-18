@@ -812,3 +812,7 @@ C:\Users\poppe\Desktop\WebShop\WebShop\obj\Debug\net6.0\WebShop.csproj.CopyCompl
 C:\Users\poppe\Desktop\WebShop\WebShop\obj\Debug\net6.0\WebShop.dll
 C:\Users\poppe\Desktop\WebShop\WebShop\obj\Debug\net6.0\ref\WebShop.dll
 C:\Users\poppe\Desktop\WebShop\WebShop\obj\Debug\net6.0\WebShop.pdb
+C:\Users\poppe\Desktop\WebShop\WebShop\bin\Debug\net6.0\wwwroot\_framework\Blazored.LocalStorage.dll
+C:\Users\poppe\Desktop\WebShop\WebShop\bin\Debug\net6.0\wwwroot\_framework\Blazored.LocalStorage.dll.gz
+C:\Users\poppe\Desktop\WebShop\WebShop\bin\Debug\net6.0\Blazored.LocalStorage.dll
+C:\Users\poppe\Desktop\WebShop\WebShop\obj\Debug\net6.0\build-gz\9cEfIbqC.gz
