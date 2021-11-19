@@ -20,9 +20,9 @@
           <NavLink href="checkout" class="navbar-link">
             <button class="btn btn-sm position-relative">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    @GetProductCount()
-                </span>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        @GetProductCount()
+                    </span>         
             </button>
           </NavLink>
       </div>
@@ -31,8 +31,6 @@
 </nav>
 
 @code {
-
-
     protected override async Task OnInitializedAsync()
     {
         CartService.OnChange += StateHasChanged;

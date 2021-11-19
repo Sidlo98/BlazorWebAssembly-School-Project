@@ -1,42 +1,83 @@
 ﻿@page "/checkout"
+@inject ISyncLocalStorageService LocalStorage
+@inject ICartService CartService
 
     <div class="container mt-5 min-height">
       <div class="row">
-        <div class="col-12 mb-2">
-          <div class="card d-flex p-3 flex-row justify-content-between">
-            <p class="h3">product name x 1 x 100kr</p>
 
-            <div class="btn-group btn-group-lg">
-              <button type="button" class="btn btn-primary">+</button>
-              <button type="button" class="btn btn-primary">-</button>
+          @if(CartItems().Count > 0)
+          {
+            foreach(var item in CartItems())
+            {
+            <div class="col-12 mb-2">
+                <div class="card d-flex p-3 flex-row justify-content-between">
+                <p class="h3">@item.product.Name x @item.quantity x @item.product.Price kr</p>
+
+                <div class="btn-group btn-group-lg">
+                    <button type="button" class="btn btn-primary" @onclick="() => AddOne(item.product)">+</button>
+                    <button type="button" class="btn btn-primary"  @onclick="() => RemoveOne(item.product)">-</button>
+                </div>
+                </div>
             </div>
-          </div>
-        </div>
-
-        <div class="col-12 mb-2">
-          <div class="card d-flex p-3 flex-row justify-content-between">
-            <p class="h3">product name x 1 x 100kr</p>
-
-            <div class="btn-group btn-group-lg">
-              <button type="button" class="btn btn-primary">+</button>
-              <button type="button" class="btn btn-primary">-</button>
+            }
+          }
+          else
+          {
+            <div class="col-12 mb-2">
+                <div class="card d-flex p-3 text-center">
+                    <p class="h3">Cart Is Empty</p>
+                </div>
             </div>
-          </div>
-        </div>
+          }
 
         <div class="col-12 mb-2">
           <div class="card d-flex p-3 flex-row justify-content-between">
             <div>
-              <p class="h3">Totalt: 200kr</p>
+              <p class="h3">Totalt: @TotalPrice() kr</p>
               <span class="text-muted">inc. tax</span>
             </div>
 
             <button type="button" class="btn btn-primary">Confirm Order</button>
           </div>
         </div>
+
+
       </div>
     </div>
 
-@code {
+@code 
+{
+    protected override async Task OnInitializedAsync()
+    {
+        CartService.OnChange += StateHasChanged;
+    }
 
+    private List<CartItem> CartItems()
+    {   
+        return LocalStorage.GetItem<List<CartItem>>("cart");
+    }
+
+    private async Task AddOne(Product product)
+    {
+        CartService.AddToCart(product);
+    }
+    private async Task RemoveOne(Product product)
+    {
+        CartService.RemoveFromCart(product);
+    }
+
+    private int TotalPrice()
+    {
+        var TotalPrice = 0;
+
+        var cart = LocalStorage.GetItem<List<CartItem>>("cart");
+
+        foreach(var item in cart)
+        {
+            TotalPrice = TotalPrice + item.product.Price * item.quantity;
+        }
+
+        return TotalPrice;
+
+    }
 }

@@ -6,5 +6,7 @@ namespace WebShop.Services
     {
         event Action OnChange;
         Task AddToCart(Product product);
+
+        Task RemoveFromCart(Product product);
     }
 }

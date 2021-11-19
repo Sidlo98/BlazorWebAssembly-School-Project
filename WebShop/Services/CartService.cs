@@ -40,6 +40,27 @@ namespace WebShop.Services
 
             OnChange.Invoke();
         }
+        public async Task RemoveFromCart(Product product)
+        {
+            var cart = await localStorage.GetItemAsync<List<CartItem>>("cart");
+
+            var cartItem = cart.Find(x => x.product.Id == product.Id);
+
+            if(cartItem.quantity < 2) {
+                cart.RemoveAll(x => x == cartItem);
+            }
+            else
+            {
+                foreach (var item in cart.Where(x => x.product.Id == product.Id))
+                {
+                    item.quantity = item.quantity - 1;
+                };
+            }
+
+            await localStorage.SetItemAsync("cart", cart);
+
+            OnChange.Invoke();
+        }
 
     }
 }
