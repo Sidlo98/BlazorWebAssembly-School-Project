@@ -8,5 +8,7 @@ namespace WebShop.Services
         Task AddToCart(Product product);
 
         Task RemoveFromCart(Product product);
+
+        Task EmptyCart();
     }
 }

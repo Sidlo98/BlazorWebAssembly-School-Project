@@ -1,7 +1,4 @@
-﻿@inject ISyncLocalStorageService LocalStorage
-@inject ICartService CartService
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
   <div class="container-fluid">
     <NavLink class="navbar-brand active" href="/" Match="NavLinkMatch.All">
         <i class="fas fa-tv"></i>
@@ -14,26 +11,43 @@
       <div class="navbar-nav">
         <NavLink class="nav-link" href="products">Products</NavLink>
         <NavLink class="nav-link" href="add">Add Products</NavLink>
+        @if (user())
+        {
+         <button @onclick="() => Logout()" class="btn btn-small btn-primary">Logout</button>
+        }
+        else
+        {
         <NavLink class="nav-link" href="login">Log In</NavLink>
+        }
       </div>
       <div class="navbar-nav">
-          <NavLink href="checkout" class="navbar-link">
-            <button class="btn btn-sm position-relative">
-                <i class="fas fa-shopping-cart"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        @GetProductCount()
-                    </span>         
-            </button>
-          </NavLink>
+                    <NavLink href="checkout" class="navbar-link">
+                    <button class="btn btn-sm position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        @if (GetProductCount() != 0)
+                        {
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            @GetProductCount()
+                            </span>         
+                        }
+                    </button>
+                    </NavLink>
       </div>
     </div>
   </div>
 </nav>
 
 @code {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         CartService.OnChange += StateHasChanged;
+        UserService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        CartService.OnChange -= StateHasChanged;
+        UserService.OnChange += StateHasChanged;
     }
 
     private int GetProductCount()
@@ -45,6 +59,25 @@
             q = q + item.quantity;
         }
         return q;
+    }
+
+    private bool user()
+    {
+        var user = LocalStorage.GetItem<User>("user");
+
+        if(user == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    private async Task Logout()
+    {
+       await UserService.Logout();
     }
 
 }

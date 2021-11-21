@@ -1,39 +1,55 @@
 ﻿@page "/register"
 
   <div class="container mt-5  min-height">
-      <form>
+      <div class="card shadow p-3">
+      <EditForm Model="@register" OnValidSubmit="@HandleValidSubmit" >
+          <DataAnnotationsValidator />
         <div class="mb-3">
           <label for="firstName" class="form-label">FirstName:</label>
-          <input type="text" class="form-control" id="firstName" />
+          <InputText type="text" class="form-control" id="firstName" @bind-Value="register.FirstName"/>
+          <ValidationMessage For="@(() => register.FirstName)" style="color: #ba291c"/>
         </div>
         <div class="mb-3">
           <label for="lastName" class="form-label">LastName:</label>
-          <input type="text" class="form-control" id="lastName" />
+          <InputText type="text" class="form-control" id="lastName" @bind-Value="register.LastName"/>
+          <ValidationMessage For="@(() => register.LastName)" style="color: #ba291c"/>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" />
+          <InputText type="email" class="form-control" id="email" @bind-Value="register.Email"/>
+          <ValidationMessage For="@(() => register.Email)" style="color: #ba291c"/>
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Password:</label>
-          <input type="password" class="form-control" id="password" />
+          <InputText type="password" class="form-control" id="password" @bind-Value="register.UserHash"/>
+          <ValidationMessage For="@(() => register.UserHash)" style="color: #ba291c"/>
         </div>
-
-        <div class="mb-3">
-          <label for="rePassword" class="form-label">Re-enter Password:</label>
-          <input type="password" class="form-control" id="rePassword" />
-        </div>
+        <ValidationSummary  style="color: #ba291c" />
 
         <div class="mb-3">
           <button type="submit" class="btn btn-primary w-100">Register</button>
         </div>
-      </form>
+      </EditForm>
       <div class="mb-3 d-flex justify-content-center">
         <p>Already have an account? Login <a href="login">here</a></p>
+      </div>
       </div>
     </div>
 
 @code {
+    private SignUp register = new();
+
+    private async Task HandleValidSubmit()
+    {
+        var response = await Http.PostAsJsonAsync("https://localhost:44332/api/users", register);
+
+        if(response.IsSuccessStatusCode)
+        {
+            var user = await response.Content.ReadFromJsonAsync<User>();
+            UserService.SetUser(user);
+            NavManager.NavigateTo("/products");
+        }
+    }
 
 }

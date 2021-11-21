@@ -1,7 +1,4 @@
 ﻿@page "/checkout"
-@inject ISyncLocalStorageService LocalStorage
-@inject ICartService CartService
-
     <div class="container mt-5 min-height">
       <div class="row">
 
@@ -31,25 +28,45 @@
           }
 
         <div class="col-12 mb-2">
-          <div class="card d-flex p-3 flex-row justify-content-between">
+          <div class="card d-flex p-3 flex-row justify-content-between align-items-center">
             <div>
               <p class="h3">Totalt: @TotalPrice() kr</p>
               <span class="text-muted">inc. tax</span>
             </div>
-
-            <button type="button" class="btn btn-primary">Confirm Order</button>
+               <p>@status</p>
+                @if (user())
+                {
+                    <button @onclick="() => MakeOrder()" type="button" class="btn btn-primary">Confirm Order</button>
+                }
+                else
+                {   
+                    <div class="d-flex flex-column align-items-center">
+                    <p>You must log in to make an order</p>
+                    <NavLink href="login">
+                       <button type="button" class="btn btn-primary d-block">Login</button>
+                    </NavLink>
+                    </div>
+                }
           </div>
+          
         </div>
-
-
       </div>
     </div>
 
 @code 
 {
-    protected override async Task OnInitializedAsync()
+    private string status = "";
+
+    protected override void OnInitialized()
     {
         CartService.OnChange += StateHasChanged;
+        UserService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        CartService.OnChange -= StateHasChanged;
+        UserService.OnChange += StateHasChanged;
     }
 
     private List<CartItem> CartItems()
@@ -59,11 +76,11 @@
 
     private async Task AddOne(Product product)
     {
-        CartService.AddToCart(product);
+        await CartService.AddToCart(product);
     }
     private async Task RemoveOne(Product product)
     {
-        CartService.RemoveFromCart(product);
+        await CartService.RemoveFromCart(product);
     }
 
     private int TotalPrice()
@@ -79,5 +96,55 @@
 
         return TotalPrice;
 
+    }
+
+    private bool user()
+    {
+        var user = LocalStorage.GetItem<User>("user");
+
+        if(user == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    private async Task MakeOrder()
+    {
+        status = "";
+        var cartItems = LocalStorage.GetItem<List<CartItem>>("cart");
+        var user = LocalStorage.GetItem<User>("user");
+
+        if(cartItems.Count == 0)
+        {
+            status = "Your cart is empty";
+        }
+        else
+        {
+            var orderLines = new List<OrderLine>();
+            foreach(var item in cartItems)
+            {
+                orderLines.Add(new OrderLine()
+                    {
+                        ProductId = item.product.Id,
+                        Quantity = item.quantity
+                    });
+            }
+            var order = new Order()
+            {
+                UserId = user.Id,
+                Status = "Recived",
+                OrderLines = orderLines
+            };
+            var response = await Http.PostAsJsonAsync("https://localhost:44332/api/orders", order);
+            if (response.IsSuccessStatusCode)
+            {
+                await CartService.EmptyCart();
+                status = "Your order was created";
+            }
+        }  
     }
 }

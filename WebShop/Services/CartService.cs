@@ -57,8 +57,14 @@ namespace WebShop.Services
                 };
             }
 
-            await localStorage.SetItemAsync("cart", cart);
+                await localStorage.SetItemAsync("cart", cart);
 
+            OnChange.Invoke();
+        }
+        public async Task EmptyCart()
+        {
+            var cart = new List<CartItem>();
+            await localStorage.SetItemAsync("cart", cart);
             OnChange.Invoke();
         }
 

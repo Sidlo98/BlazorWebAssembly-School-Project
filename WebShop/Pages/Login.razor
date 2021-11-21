@@ -1,25 +1,56 @@
 ﻿@page "/login"
 
   <div class="container mt-5 min-height">
-      <form>
+      <div class="card shadow p-3">
+       <EditForm Model="@login" OnValidSubmit="@HandleValidSubmit" >
+           <DataAnnotationsValidator />
         <div class="mb-3">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" />
+           <InputText class="form-control" id="email"  @bind-Value="login.Email" />
+            <ValidationMessage For="@(() => login.Email)" style="color: #ba291c"/>
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Password:</label>
-          <input type="password" class="form-control" id="password" />
+          <InputText type="password" class="form-control" id="userHash"  @bind-Value="login.UserHash" />
+          <ValidationMessage For="@(() => login.UserHash)" style="color: #ba291c"/>
         </div>
+          <div class="text-center text-danger">
+                <p>
+                    @failure
+                </p>
+            </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-primary w-100">Login</button>
         </div>
-      </form>
+      </EditForm>
       <div class="mb-3 d-flex justify-content-center">
         <p>Dont have an account? Create one <a href="register">here</a></p>
       </div>
+     </div>
     </div>
 
 @code {
+    private SignIn login = new();
+    private string failure = "";
 
+    private async Task HandleValidSubmit()
+    {
+        var response = await Http.PostAsJsonAsync("https://localhost:44332/login", login);
+
+        if(response.IsSuccessStatusCode)
+        {
+            failure = "";
+            var user = await response.Content.ReadFromJsonAsync<User>();
+            UserService.SetUser(user);
+            NavManager.NavigateTo("/products");
+        }
+        else
+        {
+            failure = "Wrong email or password";
+        }
+
+        login = new();
+        StateHasChanged();  
+    }
 }
